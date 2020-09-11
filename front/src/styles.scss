@@ -1,12 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 :root {
-  --primary-color: #dc3545;
+  --primary-color: #6663FF;
   --dark-color: #333333;
   --light-color: #f4f4f4;
-  --danger-color: #dc3545;
-  --success-color: #28a745;
+  --danger-color: #EE4444;
+  --success-color: #6FDB8D;
 }
+
+/* $--color-primary:#6663FF;
+$--color-success: #6FDB8D;
+$--color-warning: #9DA408 !default;
+$--color-danger: #EE4444;
+$--color-info: #0A76A4 !default;
+$--color-ff-accent-color:#FFA21C */
 
 * {
   box-sizing: border-box;
