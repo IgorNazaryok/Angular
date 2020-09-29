@@ -1,29 +1,58 @@
 import {Injectable} from '@angular/core'
-import {HttpClient} from '@angular/common/http'
-import { User } from '../../../shared/interface'
-import { Observable } from 'rxjs'
+import {HttpClient, HttpErrorResponse} from '@angular/common/http'
+import { User, AuthRespons } from '../../../shared/interface'
+import { Observable, Subject, throwError } from 'rxjs'
+import { catchError, tap } from 'rxjs/operators'
+
+
+import {environment} from '../../../../environments/environment'
 
 @Injectable()
 export class AuthService{
+    public error$: Subject<string>=new Subject<string>()
+
     constructor(private httpClient: HttpClient){}
 
     get token(): string {
-    return ''
+    const expDate = new Date(localStorage.getItem('fb-token-exp'))
+/*     if(new Date()> expDate){
+        this.logout()
+        return null
+    } */
+    return localStorage.getItem('fb-token-exp')
     }
 
     Login(user:User):Observable<any>
     {
-        return this.httpClient.post('',user)
+       // return this.httpClient.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,user)
+        return this.httpClient.post(`https://localhost:5001/Account`,user)
+        .pipe(
+           tap(this.setToken),
+           catchError(this.handleError.bind(this)) 
+        )
     }
     logout()
     {
-
+        this.setToken(null)
     }
     isAutentificated(): boolean {
         return !!this.token
     }
 
-    private setToken(){
+    private handleError (err: HttpErrorResponse) {
+        this.error$.next(err.error.errorText)
+         return throwError(err)
+        
+    }
 
+    // private setToken(res:AuthRespons|null){
+    private setToken(res){        
+      if(res){
+        const expDate = new Date(new Date().getTime())
+        localStorage.setItem('fb-token', res.access_token)
+        localStorage.setItem('fb-token-exp', expDate.toString())
+       }
+       else localStorage.clear()
+        
     }
 }

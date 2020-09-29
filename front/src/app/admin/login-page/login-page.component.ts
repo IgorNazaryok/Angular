@@ -4,6 +4,7 @@ import {User} from '../../shared/interface'
 import { AuthService } from '../shared/service/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -14,7 +15,7 @@ export class LoginPageComponent implements OnInit {
 
 
   constructor(
-    private auth:AuthService,
+    public auth:AuthService,
     private router: Router
   ) { }
 
@@ -30,12 +31,16 @@ export class LoginPageComponent implements OnInit {
   submit(){
     const user:User = {
       email: this.form.value.email,
-      password: this.form.value.password
+      password: this.form.value.password,
+      returnSecureToken:true 
     }
     this.auth.Login(user).subscribe(()=>{
       this.form.reset
+      alert(`Добро пожаловать ${user.email}`)
       this.router.navigate(['/admin', 'dashboard'])
     })
   }
+
+
 
 }

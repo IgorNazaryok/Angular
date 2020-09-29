@@ -1,30 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    [Route("[controller]")]
+
+    public class UsersController : Controller
     {
         BlogDbContext db;
+
         public UsersController(BlogDbContext context)
         {
             db = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> Get()
         {
             return await db.Users.ToListAsync();
         }
 
-        // GET api/users/5
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
@@ -34,7 +41,7 @@ namespace WebAPI.Controllers
             return new ObjectResult(user);
         }
 
-        // POST api/users
+
         [HttpPost]
         public async Task<ActionResult<User>> Post(User user)
         {
@@ -48,7 +55,7 @@ namespace WebAPI.Controllers
             return Ok(user);
         }
 
-        // PUT api/users/
+
         [HttpPut]
         public async Task<ActionResult<User>> Put(User user)
         {
@@ -66,7 +73,7 @@ namespace WebAPI.Controllers
             return Ok(user);
         }
 
-        // DELETE api/users/5
+ 
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> Delete(int id)
         {

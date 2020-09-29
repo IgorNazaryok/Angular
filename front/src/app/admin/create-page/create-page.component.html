@@ -1,1 +1,31 @@
-<p>create-page works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <h1>Создание нового поста</h1>
+    <div class="form-control">
+        <label for="title">Название поста:</label>
+        <input id="title" type="text" formControlName="title">
+        <div class="validation">
+            <small>
+            title
+            </small>
+        </div>
+    </div>
+
+    <div class="form-control">
+        <label>
+            Контент поста:
+        </label>
+        <quill-editor formControlName='text'></quill-editor>
+    
+    </div>
+
+    <div class="form-control">
+        <label for="author">Автор поста:</label>
+        <input id="author" type="text" formControlName="author">
+        <div class="validation">
+            <small>
+            author
+            </small>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-block btn-dark">Создать пост</button>
+</form>    
