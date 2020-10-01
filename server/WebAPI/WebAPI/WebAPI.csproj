@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20200911141318_InitAndSeed.Designer.cs" />
     <Compile Remove="Migrations\20200911183001_InitAndSeed.cs" />
     <Compile Remove="Migrations\20200911183001_InitAndSeed.Designer.cs" />
+    <Compile Remove="Migrations\20200929175106_AddPostAndSeed.cs" />
+    <Compile Remove="Migrations\20200929175106_AddPostAndSeed.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

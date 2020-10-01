@@ -1,22 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import {UserService} from '../shared/service/user.service'
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {PostService} from '../../shared/post.service'
+import { Post} from '../../shared/interface'
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss']
 })
-export class DashboardPageComponent implements OnInit {
+export class DashboardPageComponent implements OnInit, OnDestroy {
 
-  constructor(
-    private userService:UserService,
-  ) { }
+  posts:Post[]
+  pSub:Subscription
+  constructor(private postService:PostService) { }
 
   ngOnInit(): void {
+    this.postService.GetPosts().subscribe(res=>{
+      this.posts=res
+          console.log(this.posts);
+          
+    })
   }
 
-  getUsers(){
-    this.userService.GetUsers().subscribe()
+  ngOnDestroy(): void{
+    if (this.pSub){
+      this.pSub.unsubscribe()
+    }
   }
-
 }

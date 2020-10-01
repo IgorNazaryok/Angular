@@ -8,7 +8,6 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { CreatePageComponent } from './create-page/create-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {AuthService} from './shared/service/auth.service'
 import {AuthGuard} from './shared/service/auth.guard'
 import {ShareModule} from '../shared/shared.module'
 import {UserService} from './shared/service/user.service'
@@ -34,6 +33,6 @@ import {UserService} from './shared/service/user.service'
   exports:[
     RouterModule
   ],
-  providers: [AuthService, AuthGuard, UserService]
+  providers: [AuthGuard, UserService]
 })
 export class AdminModule { }

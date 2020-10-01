@@ -7,19 +7,19 @@ import { catchError, tap } from 'rxjs/operators'
 
 import {environment} from '../../../../environments/environment'
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthService{
     public error$: Subject<string>=new Subject<string>()
 
     constructor(private httpClient: HttpClient){}
 
     get token(): string {
-    const expDate = new Date(localStorage.getItem('fb-token-exp'))
+    const expDate = new Date(localStorage.getItem('fb-token'))
 /*     if(new Date()> expDate){
         this.logout()
         return null
     } */
-    return localStorage.getItem('fb-token-exp')
+    return localStorage.getItem('fb-token')
     }
 
     Login(user:User):Observable<any>

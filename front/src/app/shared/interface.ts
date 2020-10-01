@@ -14,5 +14,11 @@ export interface Post {
     title:string
     text:string
     author:string
-    date:Date 
+    date:string 
+}
+
+export interface PostCreateError {
+       Author: Array<string>
+       Title: Array<string>
+       Text:  Array<string>
 }

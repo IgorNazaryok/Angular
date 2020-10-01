@@ -220,7 +220,7 @@ img {
 .form-control {
   display: block;
   color: #888;
-  margin-bottom: .8rem;
+  margin-bottom: .8rem; 
 
   &.invalid {
     color: var(--primary-color);
@@ -231,6 +231,8 @@ img {
 
   .validation {
     color: var(--primary-color);
+    margin: 0;
+    padding: 0;
   }
 }
 

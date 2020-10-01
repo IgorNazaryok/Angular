@@ -5,7 +5,7 @@
         <input id="title" type="text" formControlName="title">
         <div class="validation">
             <small>
-            title
+                <div class="alert alert-danger" *ngIf="post.errorCreatePost.Title[0]"> {{post.errorCreatePost.Title[0]}} </div>
             </small>
         </div>
     </div>
@@ -15,7 +15,11 @@
             Контент поста:
         </label>
         <quill-editor formControlName='text'></quill-editor>
-    
+        <div class="validation">
+            <small>
+                <div class="alert alert-danger" *ngIf="post.errorCreatePost.Text[0]"> {{post.errorCreatePost.Text[0]}} </div>
+            </small>
+        </div>
     </div>
 
     <div class="form-control">
@@ -23,9 +27,11 @@
         <input id="author" type="text" formControlName="author">
         <div class="validation">
             <small>
-            author
+                <div class="alert alert-danger" *ngIf="post.errorCreatePost.Author[0]"> {{post.errorCreatePost.Author[0]}} </div>
             </small>
         </div>
     </div>
     <button type="submit" class="btn btn-block btn-dark">Создать пост</button>
-</form>    
+</form>   
+
+<button type="button" class="btn btn-success" (click)="getPosts()">Получить посты</button>
